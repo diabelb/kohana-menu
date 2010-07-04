@@ -4,7 +4,7 @@
 
 The menus are defined in configuration files, which must be placed in the "config/menu" folder.
 
-See `config/menu/default.php`
+See [config/menu/default.php](http://github.com/b263/kohana-menu/blob/master/config/menu/default.php)
 
 To render the menu without modifications, call:
 
