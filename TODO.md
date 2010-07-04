@@ -1,0 +1,3 @@
+-	Unit tests
+-	Documentation
+-	Add support for custom attributes
