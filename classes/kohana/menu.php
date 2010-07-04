@@ -37,6 +37,11 @@ class Kohana_Menu
 		return $this->view->bind('menu', $this->menu)->render();
 	}
 
+	public function __toString()
+	{
+		return $this->render();
+	}
+
 	public function set_current($url = '')
 	{
 		$item =& Menu::get_item_by_url($url, $this->menu);
