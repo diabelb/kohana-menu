@@ -32,16 +32,29 @@ class Kohana_Menu
 		return new Menu('menu/'.$config);
 	}
 
+	/**
+	 * @return	string	the rendered view
+	 */
 	public function render()
 	{
 		return $this->view->bind('menu', $this->menu)->render();
 	}
 
+	/**
+	 * @see	render()
+	 */
 	public function __toString()
 	{
 		return $this->render();
 	}
 
+	/**
+	 * Marks an item with a css class as the current item.
+	 * The class can be set with the "current_class" config key.
+	 *
+	 * @param	string	$url	the url of the affected item
+	 * @return	Nav $this
+	 */
 	public function set_current($url = '')
 	{
 		$item =& Menu::get_item_by_url($url, $this->menu);
@@ -54,6 +67,11 @@ class Kohana_Menu
 		return $this;
 	}
 
+	/**
+	 * @param	string	$url
+	 * @param	string	$title	the new title
+	 * @return	Nav $this
+	 */
 	public function set_title($url, $title)
 	{
 		$item =& Menu::get_item_by_url($url, $this->menu);
@@ -62,6 +80,11 @@ class Kohana_Menu
 		return $this;
 	}
 
+	/**
+	 * @param	string	$url
+	 * @param	string	$new_url	the url will be changed to this value
+	 * @return	Nav $this
+	 */
 	public function set_url($url, $new_url)
 	{
 		$item =& Menu::get_item_by_url($url, $this->menu);
@@ -70,6 +93,11 @@ class Kohana_Menu
 		return $this;
 	}
 
+	/**
+	 * @param	string	$url
+	 * @param	string	$class	the css class to be added
+	 * @return	Nav $this
+	 */
 	public function add_class($url, $class)
 	{
 		$item =& Menu::get_item_by_url($url, $this->menu);
@@ -83,6 +111,11 @@ class Kohana_Menu
 		return $this;
 	}
 
+	/**
+	 * @param	string	$url
+	 * @param	string	$class	the css class to be removed
+	 * @return	Nav $this
+	 */
 	public function remove_class($url, $class)
 	{
 		$item =& Menu::get_item_by_url($url, $this->menu);
@@ -97,6 +130,7 @@ class Kohana_Menu
 
 	/**
 	 * Recursively apply URL::site to all internal links.
+	 *
 	 * @param	array	$menu	a menu items
 	 * @return	array	the processed menu item
 	 */
