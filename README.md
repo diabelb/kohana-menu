@@ -2,7 +2,7 @@
 
 ## Basics
 
-The menus are defined in configuration files, which must be placed in the "config/menu" folder.
+The menus are defined in configuration files, which must be placed in the `config/menu` folder.
 
 See [config/menu/default.php](http://github.com/b263/kohana-menu/blob/master/config/menu/default.php)
 
@@ -58,7 +58,7 @@ You can change the settings of each item with the following methods:
 
 ## Matching URLs
 
-By default, the URL parameter must exactly match the predifined `url` setting of the menu item, which could have changed in the meantime, by a call of `set_url`:
+By default, the URL parameter must exactly match the predefined `url` setting of the menu item, which could have changed in the meantime, by a call of `set_url`:
 
 	$menu->set_url('artice/show', 'article/show/123');
 
