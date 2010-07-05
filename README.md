@@ -14,7 +14,6 @@ To render the menu without modifications, call:
 
 1.	Place the files in the modules directory. Example:
 
-		cd <>
 		git clone http://github.com/b263/kohana-menu.git modules/menu
 
 2.	Create a folder `menu` in your applications config directory, copy the `menu/example.php` into it, rename it to `default.php` and adjust it to fit your navigation.
