@@ -10,9 +10,30 @@ To render the menu without modifications, call:
 
 	Menu::factory()->render();
 
+## Installation
+
+1.	Place the files in the modules directory. Example:
+
+		cd <>
+		git clone http://github.com/b263/kohana-menu.git modules/menu
+
+2.	Create a folder `menu` in your applications config directory, copy the `menu/example.php` into it, rename it to `default.php` and adjust it to fit your navigation.
+
+		mkdir -p application/config/menu
+		cp modules/menu/config/menu/example.php application/config/menu/default.php
+
+		# edit application/config/menu/default.php
+
+3.	Activate the module in the `bootstrap.php` file.
+
+		Kohana::modules(array(
+			...
+			'menu' => MODPATH.'menu',
+		));
+
 ## Config files
 
-You can use different config files, by setting the factory method's $config parameter.
+You can use different config files, by setting the factory method's `$config` parameter.
 
 ### Example: Load menu configuration based on user role
 

@@ -8,51 +8,45 @@ return array
 
 	'items' => array
 	(
-
 		array
 		(
-			'url'  => 'http://kohanaframework.org/',
+			'url'   => 'http://kohanaframework.org/',
 			'title' => __('Home'),
 		),
-
 		array
 		(
-			'url'    => 'download',
+			'url'     => 'download',
 			'title'   => __('Download'),
 			'classes' => array('test'),
 		),
-
 		array
 		(
-			'url'  => 'documentation',
+			'url'   => 'documentation',
 			'title' => __('Documentation'),
 			'items' => array
 			(
 				array
 				(
-					'url'  => 'documentation/lorem-ipsum',
+					'url'   => 'documentation/lorem-ipsum',
 					'title' => __('Lorem ipsum'),
 				),
 				array
 				(
-					'url'  => 'documentation/dolor-sit-amet',
+					'url'   => 'documentation/dolor-sit-amet',
 					'title' => __('Dolor sit amet'),
 				),
 			),
 		),
-
 		array
 		(
-			'url'  => 'community',
+			'url'   => 'community',
 			'title' => __('Community'),
 		),
-
 		array
 		(
-			'url'  => 'development',
+			'url'   => 'development',
 			'title' => __('Development'),
 		),
-
-	)
+	),
 
 );
