@@ -115,7 +115,7 @@ class Kohana_Menu
 		if ( ! empty($item) AND isset($item['classes']))
 		{
 			$matching_class_key = array_search($class, $item['classes']);
-			if ($matching_class_key)
+			if ($matching_class_key !== FALSE)
 				unset($item['classes'][$matching_class_key], $matching_class_key);
 		}
 		return $this;
