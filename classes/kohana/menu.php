@@ -20,7 +20,6 @@ class Kohana_Menu
 		$this->config = Kohana::config($config);
 		$this->view = View::factory($this->config['view']);
 		$this->menu = array('items' => &$this->config['items']);
-		$this->menu = Menu::process_urls($this->menu);
 	}
 
 	/**
@@ -37,7 +36,9 @@ class Kohana_Menu
 	 */
 	public function render()
 	{
-		return $this->view->bind('menu', $this->menu)->render();
+		return $this->view
+			->set('menu', Menu::process_urls($this->menu))
+			->render();
 	}
 
 	/**
@@ -124,10 +125,10 @@ class Kohana_Menu
 	/**
 	 * Recursively apply URL::site to all internal links.
 	 *
-	 * @param	array	$menu	a menu items
+	 * @param	array	$menu	menu items
 	 * @return	array	the processed menu item
 	 */
-	protected static function process_urls(array &$menu)
+	protected static function process_urls(array $menu)
 	{
 		if (isset($menu['url']))
 		{
