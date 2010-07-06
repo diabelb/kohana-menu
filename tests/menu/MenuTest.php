@@ -4,6 +4,12 @@ class MenuTest extends PHPUnit_Framework_TestCase
 {
 
 	protected $config = 'example';
+	protected $menu;
+
+	protected function setUp()
+	{
+		$this->menu = Menu::factory($this->config);
+	}
 
 	/**
 	 * @test
@@ -19,8 +25,7 @@ class MenuTest extends PHPUnit_Framework_TestCase
 	 */
 	public function configIsRead()
 	{
-		$menu = Menu::factory($this->config);
-		$exampleConfig = $this->getProtectedArray($menu, 'config');
+		$exampleConfig = $this->getProtectedArray($this->menu, 'config');
 		$this->assertEquals($exampleConfig['view'], 'menu');
 		$this->assertEquals($exampleConfig['current_class'], 'current');
 		$this->assertEquals($exampleConfig['items'][0]['url'], 'http://kohanaframework.org/');
@@ -36,10 +41,9 @@ class MenuTest extends PHPUnit_Framework_TestCase
 	 */
 	public function addClass()
 	{
-		$menu = Menu::factory($this->config);
 		$className = 'unittest';
-		$menu->add_class('documentation', $className);
-		$exampleConfig = $this->getProtectedArray($menu, 'config');
+		$this->menu->add_class('documentation', $className);
+		$exampleConfig = $this->getProtectedArray($this->menu, 'config');
 		$this->assertEquals($exampleConfig['items'][2]['classes'][0], $className);
 		$this->assertEquals(count($exampleConfig['items'][2]['classes']), 1);
 	}
@@ -49,8 +53,7 @@ class MenuTest extends PHPUnit_Framework_TestCase
 	 */
 	public function stringCast()
 	{
-		$menu = Menu::factory($this->config);
-		$this->assertEquals($menu->render(), (string) $menu);
+		$this->assertEquals($this->menu->render(), (string) $this->menu);
 	}
 
 	/**
@@ -58,9 +61,8 @@ class MenuTest extends PHPUnit_Framework_TestCase
 	 */
 	public function markCurrentItem()
 	{
-		$menu = Menu::factory($this->config)
-			->set_current('documentation/lorem-ipsum');
-		$exampleConfig = $this->getProtectedArray($menu, 'config');
+		$this->menu->set_current('documentation/lorem-ipsum');
+		$exampleConfig = $this->getProtectedArray($this->menu, 'config');
 		$this->assertEquals($exampleConfig['items'][2]['items'][0]['classes'][0], $exampleConfig['current_class']);
 	}
 
@@ -69,12 +71,11 @@ class MenuTest extends PHPUnit_Framework_TestCase
 	 */
 	public function addRemoveClass()
 	{
-		$menu = Menu::factory($this->config)
-			->add_class('documentation', 'unittest');
-		$exampleConfig = $this->getProtectedArray($menu, 'config');
+		$this->menu->add_class('documentation', 'unittest');
+		$exampleConfig = $this->getProtectedArray($this->menu, 'config');
 		$this->assertEquals($exampleConfig['items'][2]['classes'][0], 'unittest');
-		$menu->remove_class('documentation', 'unittest');
-		$exampleConfig = $this->getProtectedArray($menu, 'config');
+		$this->menu->remove_class('documentation', 'unittest');
+		$exampleConfig = $this->getProtectedArray($this->menu, 'config');
 		$this->assertTrue(empty($exampleConfig['items'][2]['classes']));
 	}
 
@@ -83,9 +84,8 @@ class MenuTest extends PHPUnit_Framework_TestCase
 	 */
 	public function setTitle()
 	{
-		$menu = Menu::factory($this->config)
-			->set_title('documentation/lorem-ipsum', 'unittest');
-		$exampleConfig = $this->getProtectedArray($menu, 'config');
+		$this->menu->set_title('documentation/lorem-ipsum', 'unittest');
+		$exampleConfig = $this->getProtectedArray($this->menu, 'config');
 		$this->assertEquals($exampleConfig['items'][2]['items'][0]['title'], 'unittest');
 	}
 
@@ -94,9 +94,8 @@ class MenuTest extends PHPUnit_Framework_TestCase
 	 */
 	public function setUrl()
 	{
-		$menu = Menu::factory($this->config)
-			->set_url('documentation/lorem-ipsum', 'unittest');
-		$exampleConfig = $this->getProtectedArray($menu, 'config');
+		$this->menu->set_url('documentation/lorem-ipsum', 'unittest');
+		$exampleConfig = $this->getProtectedArray($this->menu, 'config');
 		$this->assertEquals($exampleConfig['items'][2]['items'][0]['url'], 'unittest');
 	}
 
