@@ -42,7 +42,7 @@ You can use different config files, by setting the factory method's `$config` pa
 
 The config setting `current_class` defines the css class, which will be used by the `set_current()` method, to mark the current menu item:
 
-	$menu->set_current('artice/show');
+	$menu->set_current('article/show');
 
 The parameter of `set_current()` is the URL segment of the respective item.
 
