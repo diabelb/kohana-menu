@@ -57,14 +57,7 @@ class Kohana_Menu
 	 */
 	public function set_current($url = '')
 	{
-		$item =& Menu::get_item_by_url($url, $this->menu);
-		if ( ! empty($item))
-		{
-			if ( ! isset($item['classes']))
-				$item['classes'] = array();
-			$item['classes'][] = $this->config['current_class'];
-		}
-		return $this;
+		return $this->add_class($url, $this->config['current_class']);
 	}
 
 	/**

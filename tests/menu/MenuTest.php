@@ -29,4 +29,17 @@ class MenuTest extends PHPUnit_Framework_TestCase
 		return unserialize(PHPUnit_Framework_Assert::readAttribute($object, $property));
 	}
 
+	/**
+	 * @test
+	 */
+	public function addClass()
+	{
+		$menu = Menu::factory('example');
+		$className = 'unittest';
+		$menu->add_class('documentation', $className);
+		$exampleConfig = $this->getProtectedArray($menu, 'config');
+		$this->assertEquals($exampleConfig['items'][2]['classes'][0], $className);
+		$this->assertEquals(count($exampleConfig['items'][2]['classes']), 1);
+	}
+
 }
