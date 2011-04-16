@@ -19,7 +19,14 @@ class Kohana_Menu
 	{
 		$this->config = Kohana::config($config);
 		$this->view = View::factory($this->config['view']);
-		$this->menu = array('items' => &$this->config['items']);
+
+                if ($this->config['driver'] == 'database') {
+                    $menu = ORM::factory('menu_item');
+                    $items = $menu->where('parent_id', '=', 0)->find_all();
+                    $this->menu['items'] = $this->get_from_database_orm($items);
+                }
+                else if ($this->config['driver'] == 'file')
+                    $this->menu = array('items' => &$this->config['items']);
 	}
 
 	/**
@@ -40,6 +47,26 @@ class Kohana_Menu
 			->set('menu', Menu::process_urls($this->menu))
 			->render();
 	}
+
+        /**
+         * @param object $items object ORM that contains main menu items
+         * @return array array that contains menu items from database
+         */
+        private function get_from_database_orm($items) {
+            $temp = array();
+            
+            foreach ($items as $key => $item) {
+                $temp[$key]['url'] = $item->url;
+                $temp[$key]['title'] = $item->title;
+                if ($item->classes) {
+                        $temp[$key]['classes'] = array($item->classes);
+                }
+                $subcategories = $item->subcategories->find_all();
+                if ($subcategories->count() > 0)
+                    $temp[$key]['items'] = $this->get_from_database_orm($subcategories);
+            }
+            return $temp;
+        }
 
 	/**
 	 * @see	render()
