@@ -21,9 +21,21 @@ class Kohana_Menu
 		$this->view = View::factory($this->config['view']);
 
                 if ($this->config['driver'] == 'database') {
-                    $menu = ORM::factory('menu_item');
-                    $items = $menu->where('parent_id', '=', 0)->find_all();
-                    $this->menu['items'] = $this->get_from_database_orm($items);
+
+                    // Cache support
+                    $cache = Cache::instance ();
+                    $menu = $cache->get ('menu');
+                    if ($menu) {
+                         $this->menu['items'] = $menu;
+                    }
+                    else {
+                        $menu = ORM::factory('menu_item');
+                        $items = $menu->where('parent_id', '=', 0)->find_all();
+                        $items = $this->get_from_database_orm($items);
+                        $cache->set('menu', $items);
+                        $this->menu['items'] = $items;
+                    }
+                    
                 }
                 else if ($this->config['driver'] == 'file')
                     $this->menu = array('items' => &$this->config['items']);
